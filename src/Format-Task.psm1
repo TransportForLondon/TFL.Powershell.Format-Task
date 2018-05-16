@@ -12,7 +12,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-function Print-Good {
+function Write-Good {
 
     $green = @{
         Object = [Char]8730
@@ -25,7 +25,7 @@ function Print-Good {
     Write-Information -NoNewline "]"
 }
 
-function Print-Bad {
+function Write-Bad {
 
     <#
     .Synopsis
@@ -148,7 +148,7 @@ function Format-Task
             $pre = $host.UI.RawUI.CursorPosition
             $host.UI.RawUI.CursorPosition = $origPos
 
-            Print-Good
+            Write-Good
 
             if ($ret -ne $null -and ($noResult -eq $false)) {
                 Write-Information " - Result: $($ret), Time: $($elapsedTime)"
@@ -166,7 +166,7 @@ function Format-Task
 
             Write-Information "$($tabPrefix)Time: $($elapsedTime)"
             Write-Information "$($tabPrefix)Success: " -NoNewline
-            Print-Good
+            Write-Good
             Write-Information
             Write-Information
         }
@@ -189,7 +189,7 @@ function Format-Task
             $pre = $host.UI.RawUI.CursorPosition
             $host.UI.RawUI.CursorPosition = $origPos
 
-            Print-Bad $_.Exception
+            Write-Bad $_.Exception
             
             Write-Information " - Time: $($elapsedTime)"
             
@@ -198,7 +198,7 @@ function Format-Task
 
             Write-Information "$($tabPrefix)Time: $($elapsedTime)"
             Write-Information "$($tabPrefix)Fail: " -NoNewline
-            Print-Bad $_.Exception
+            Write-Bad $_.Exception
             Write-Information
             Write-Information
         }
