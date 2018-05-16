@@ -16,37 +16,36 @@ Install-Module TFL.Powershell.Format-Task -Scope CurrentUser -Force
 ```powershell
 Install-Module TFL.Powershell.Format-Task -Scope CurrentUser -Force
 
-$length = Format-Task "Calculating Google's page size" {
+$length = Format-Task "Calculating Example's page size" {
 
-    $request = Format-Task "Fetching Google's page" {
+    $request = Format-Task "Fetching Example's page" {
    
-        return Invoke-WebRequest -Uri "https://google.com"
+        return Invoke-WebRequest -Uri "https://example.com"
   
     } -NoResult
 
     return $request.RawContentLength
 }
 
-Write-Output "Google's front-page is $($length) bytes" 
+Write-Output "Example's front-page is $($length) bytes" 
 ```
 
 ### Output
 
 ```
-Calculating Google's page size
--------------------------------------------------------------
+Calculating Example's page size
+----------------------------------------------------------
 
-    Fetching Google's page
-    ---------------------------------------------------------
-    Time: 623.11 ms
+    Fetching Example's page
+    ------------------------------------------------------
+    Time: 449.25 ms
     Success: [√]
 
-Result: 46622
-Time: 639.79 ms
+Result: 1270
+Time: 563.56 ms
 Success: [√]
 
-Google's front-page is 46622 bytes
-
+Example's front-page is 1270 bytes
 ```
 
 ## Issues
