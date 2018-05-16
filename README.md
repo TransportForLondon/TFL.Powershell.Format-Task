@@ -1,6 +1,8 @@
 # TFL.Powershell.Format-Task
 Formats a task with additional information.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/g43d3owg3q1axaqk?svg=true)](https://ci.appveyor.com/project/TomBonnerAtTFL/tfl-powershell-format-task) [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/TFL.Powershell.Format-Task.svg)](https://www.powershellgallery.com/packages/TFL.Powershell.Format-Task)
+
 ## Installation
 
 ```
