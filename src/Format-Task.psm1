@@ -123,6 +123,7 @@ function Format-Task
 
         # Override the error-action to help us pick up exceptions
         $ErrorActionPreference = "Stop"
+        $InformationPreference = "Continue"
         
         # Print header
         if (AreWeNotVSTS -and $host.UI.SupportsVirtualTerminal) {
