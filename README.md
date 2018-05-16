@@ -5,7 +5,7 @@ Formats a task with additional information.
 
 ## Installation
 
-```
+```powershell
 Install-Module TFL.Powershell.Format-Task -Scope CurrentUser -Force
 ```
 
@@ -13,7 +13,7 @@ Install-Module TFL.Powershell.Format-Task -Scope CurrentUser -Force
 
 ### Code
 
-```
+```powershell
 Install-Module TFL.Powershell.Format-Task -Scope CurrentUser -Force
 
 $length = Format-Task "Calculating Google's page size" {
