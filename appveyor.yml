@@ -2,7 +2,7 @@ image:
   - Visual Studio 2017
 
 environment:
-  ModuleName: "Format-Task"
+  ModuleName: "TFL.Powershell.Format-Task"
   Author: "Transport For London"
   Description: "Formats a task with additional information."
   ProjectUri: "https://github.com/TomBonnerAtTFL/TFL.Powershell.Format-Task"
