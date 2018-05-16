@@ -123,7 +123,6 @@ function Format-Task
 
         # Override the error-action to help us pick up exceptions
         $ErrorActionPreference = "Stop"
-        $InformationPreference = "Continue"
         
         # Print header
         if (AreWeNotVSTS -and $host.UI.SupportsVirtualTerminal) {
@@ -165,19 +164,11 @@ function Format-Task
                 Write-Host "$($tabPrefix)Result: $($ret)"
             }
 
-<<<<<<< HEAD
-            Write-Information "$($tabPrefix)Time: $($elapsedTime)"
-            Write-Information "$($tabPrefix)Success: " -NoNewline
-            Write-Good
-            Write-Information
-            Write-Information
-=======
             Write-Host "$($tabPrefix)Time: $($elapsedTime)"
             Write-Host "$($tabPrefix)Success: " -NoNewline
             Print-Good
             Write-Host
             Write-Host
->>>>>>> parent of e9becb1... Swapped all Write-Host's for Write-Informations
         }
 
         if ($NoReturn) {
@@ -204,20 +195,11 @@ function Format-Task
 
             $host.UI.RawUI.CursorPosition = $pre
         } else {
-
-<<<<<<< HEAD
-            Write-Information "$($tabPrefix)Time: $($elapsedTime)"
-            Write-Information "$($tabPrefix)Fail: " -NoNewline
-            Write-Bad $_.Exception
-            Write-Information
-            Write-Information
-=======
             Write-Host "$($tabPrefix)Time: $($elapsedTime)"
             Write-Host "$($tabPrefix)Fail: " -NoNewline
             Print-Bad $_.Exception
             Write-Host
             Write-Host
->>>>>>> parent of e9becb1... Swapped all Write-Host's for Write-Informations
         }
 
         throw
