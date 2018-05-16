@@ -166,7 +166,7 @@ function Format-Task
 
             Write-Host "$($tabPrefix)Time: $($elapsedTime)"
             Write-Host "$($tabPrefix)Success: " -NoNewline
-            Print-Good
+            Write-Good
             Write-Host
             Write-Host
         }
@@ -197,7 +197,7 @@ function Format-Task
         } else {
             Write-Host "$($tabPrefix)Time: $($elapsedTime)"
             Write-Host "$($tabPrefix)Fail: " -NoNewline
-            Print-Bad $_.Exception
+            Write-Bad $_.Exception
             Write-Host
             Write-Host
         }
