@@ -1,0 +1,58 @@
+image:
+	- Visual Studio 2017
+
+environment:
+	ModuleName: "Format-Task"
+	Author: "Transport For London"
+	Description: "Formats a task with additional information."
+	ProjectUri: "https://github.com/TomBonnerAtTFL/TFL.Powershell.Format-Task"
+	LicenseUri: "https://github.com/TomBonnerAtTFL/TFL.Powershell.Format-Task/blob/master/LICENSE"
+	FunctionsToExport: "Format-Task"
+	Copyright: "Copyright 2018 Transport for London"
+	Tags: "Write;Format;Task"
+
+skip_tags: true
+
+pull_requests:
+	do_not_increment_build_number: true
+
+init:
+	- ps: Update-AppveyorBuild -Version "$(Get-Date -Format yy.MM.dd).$($Env:APPVEYOR_BUILD_NUMBER)"
+	
+build_script:
+	- ps: .\Generate-Module.ps1
+	
+test_script:
+	- ps:
+			$res = Invoke-Pester -Path ".\tests" -OutputFormat "NUnitXml" -OutputFile "TestsResults.xml" -PassThru
+
+			Push-AppveyorArtifact "TestsResults.xml"
+
+			(New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
+			if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
+
+artifacts:
+	- path: '**\*.nupkg'
+
+deploy:
+	- provider: NuGet
+		server: "https://www.powershellgallery.com/api/v2/package/"
+		api_key:
+			secure: o1BgTRgASo3Lg+nKT4tyPGX6RyZSr4jS9ZCkVDYvwG8ZEraJ+l7upDGymEj6Mtch
+		skip_symbols: true
+		artifact: /.*\.nupkg/
+		on:
+			branch: master
+
+	- provider: GitHub
+		description: ""
+		auth_token:
+			secure: NA7rOXSGoqGEUx+NyEMmIxzRsHXKCohqiDdrokBOhZxF3JbafUEd7IoxRrP+/wnQ
+		artifact: /.*\.nupkg/
+		on:
+			branch: master
+
+notifications:
+	- provider: Webhook
+		url:
+			secure: cHPOBUvugqRmAduMzxlyphr1x2HWXIXNCMqGrIjK2CQ=
