@@ -13,9 +13,6 @@ environment:
 
 skip_tags: true
 
-pull_requests:
-  do_not_increment_build_number: true
-
 init:
   - ps: Update-AppveyorBuild -Version "$(Get-Date -Format yy.MM.dd).$($Env:APPVEYOR_BUILD_NUMBER)"
   
