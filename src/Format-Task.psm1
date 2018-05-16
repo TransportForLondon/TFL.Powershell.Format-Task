@@ -20,9 +20,9 @@ function Write-Good {
         NoNewLine = $true
     }
 
-    Write-Information -NoNewLine "["
-    Write-Information @green
-    Write-Information -NoNewline "]"
+    Write-Host -NoNewLine "["
+    Write-Host @green
+    Write-Host -NoNewline "]"
 }
 
 function Write-Bad {
@@ -44,9 +44,9 @@ function Write-Bad {
         NoNewLine = $true
     }
 
-    Write-Information -NoNewLine "["
-    Write-Information @red
-    Write-Information "] `($($exceptionMessage)`)" -NoNewline
+    Write-Host -NoNewLine "["
+    Write-Host @red
+    Write-Host "] `($($exceptionMessage)`)" -NoNewline
 }
 
 function AreWeNotVSTS
@@ -127,13 +127,13 @@ function Format-Task
         
         # Print header
         if (AreWeNotVSTS -and $host.UI.SupportsVirtualTerminal) {
-            Write-Information "$($tabPrefix)$($Message): " -NoNewline
+            Write-Host "$($tabPrefix)$($Message): " -NoNewline
             $origPos = $host.UI.RawUI.CursorPosition
-            Write-Information
+            Write-Host
         } else {
-            Write-Information
-            Write-Information "$($tabPrefix)$($Message)"
-            Write-Information "$($tabPrefix)$($dots)"
+            Write-Host
+            Write-Host "$($tabPrefix)$($Message)"
+            Write-Host "$($tabPrefix)$($dots)"
         }
 
         # Execute the script
@@ -152,7 +152,7 @@ function Format-Task
             Write-Good
 
             if ($ret -ne $null -and ($noResult -eq $false)) {
-                Write-Information " - Result: $($ret), Time: $($elapsedTime)"
+                Write-Host " - Result: $($ret), Time: $($elapsedTime)"
             }
 
             $host.UI.RawUI.CursorPosition = $pre
@@ -162,14 +162,22 @@ function Format-Task
             
             # If there is a result, and we are supposed to output it
             if ($ret -ne $null -and ($NoResult -eq $false)) {
-                Write-Information "$($tabPrefix)Result: $($ret)"
+                Write-Host "$($tabPrefix)Result: $($ret)"
             }
 
+<<<<<<< HEAD
             Write-Information "$($tabPrefix)Time: $($elapsedTime)"
             Write-Information "$($tabPrefix)Success: " -NoNewline
             Write-Good
             Write-Information
             Write-Information
+=======
+            Write-Host "$($tabPrefix)Time: $($elapsedTime)"
+            Write-Host "$($tabPrefix)Success: " -NoNewline
+            Print-Good
+            Write-Host
+            Write-Host
+>>>>>>> parent of e9becb1... Swapped all Write-Host's for Write-Informations
         }
 
         if ($NoReturn) {
@@ -192,16 +200,24 @@ function Format-Task
 
             Write-Bad $_.Exception
             
-            Write-Information " - Time: $($elapsedTime)"
-            
+            Write-Host " - Time: $($elapsedTime)"
+
             $host.UI.RawUI.CursorPosition = $pre
         } else {
 
+<<<<<<< HEAD
             Write-Information "$($tabPrefix)Time: $($elapsedTime)"
             Write-Information "$($tabPrefix)Fail: " -NoNewline
             Write-Bad $_.Exception
             Write-Information
             Write-Information
+=======
+            Write-Host "$($tabPrefix)Time: $($elapsedTime)"
+            Write-Host "$($tabPrefix)Fail: " -NoNewline
+            Print-Bad $_.Exception
+            Write-Host
+            Write-Host
+>>>>>>> parent of e9becb1... Swapped all Write-Host's for Write-Informations
         }
 
         throw
