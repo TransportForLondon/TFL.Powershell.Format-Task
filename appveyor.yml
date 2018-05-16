@@ -2,7 +2,7 @@ image:
   - Visual Studio 2017
 
 environment:
-  ModuleName: "Format-Task"
+  ModuleName: "TFL.Powershell.Format-Task"
   Author: "Transport For London"
   Description: "Formats a task with additional information."
   ProjectUri: "https://github.com/TomBonnerAtTFL/TFL.Powershell.Format-Task"
@@ -13,9 +13,6 @@ environment:
 
 skip_tags: true
 
-pull_requests:
-  do_not_increment_build_number: true
-
 init:
   - ps: Update-AppveyorBuild -Version "$(Get-Date -Format yy.MM.dd).$($Env:APPVEYOR_BUILD_NUMBER)"
   
@@ -23,12 +20,13 @@ build_script:
   - ps: .\Generate-Module.ps1
   
 test_script:
-  - ps:
+  - ps: |
       $res = Invoke-Pester -Path ".\tests" -OutputFormat "NUnitXml" -OutputFile "TestsResults.xml" -PassThru
 
       Push-AppveyorArtifact "TestsResults.xml"
 
       (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
+
       if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
 
 artifacts:

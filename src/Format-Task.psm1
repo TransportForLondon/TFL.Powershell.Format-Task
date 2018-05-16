@@ -12,7 +12,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-function Print-Good {
+function Write-Good {
 
     $green = @{
         Object = [Char]8730
@@ -25,7 +25,7 @@ function Print-Good {
     Write-Host -NoNewline "]"
 }
 
-function Print-Bad {
+function Write-Bad {
 
     <#
     .Synopsis
@@ -148,9 +148,9 @@ function Format-Task
             $pre = $host.UI.RawUI.CursorPosition
             $host.UI.RawUI.CursorPosition = $origPos
 
-            Print-Good
+            Write-Good
 
-            if ($ret -ne $null -and ($noResult -eq $false)) {
+            if (($null -ne $ret) -and ($noResult -eq $false)) {
                 Write-Host " - Result: $($ret), Time: $($elapsedTime)"
             }
 
@@ -160,7 +160,7 @@ function Format-Task
         } else {
             
             # If there is a result, and we are supposed to output it
-            if ($ret -ne $null -and ($NoResult -eq $false)) {
+            if (($null -ne $ret) -and ($NoResult -eq $false)) {
                 Write-Host "$($tabPrefix)Result: $($ret)"
             }
 
@@ -189,13 +189,12 @@ function Format-Task
             $pre = $host.UI.RawUI.CursorPosition
             $host.UI.RawUI.CursorPosition = $origPos
 
-            Print-Bad $_.Exception
+            Write-Bad $_.Exception
             
             Write-Host " - Time: $($elapsedTime)"
 
             $host.UI.RawUI.CursorPosition = $pre
         } else {
-
             Write-Host "$($tabPrefix)Time: $($elapsedTime)"
             Write-Host "$($tabPrefix)Fail: " -NoNewline
             Print-Bad $_.Exception

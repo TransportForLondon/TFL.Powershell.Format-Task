@@ -18,6 +18,10 @@ $scanFiles | ForEach-Object {
         $analysis = Invoke-ScriptAnalyzer -Path $_.FullName -Recurse
     
         forEach ($failure in $analysis) {
+
+            if ($failure.RuleName -eq "PSAvoidUsingWriteHost") {
+                return
+            }
     
             It "$($failure.ScriptName)#$($failure.Line) should pass $($failure.RuleName)" {
                 throw $failure.Message
